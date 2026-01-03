@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+# Only trigger the workflow when push includes changes to index.html
+on:
+  push:
+    paths:
+      - "index.html"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+
+  # workflow contains single job called deploy
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+        # checkout repo and downloads onto the runner, thus making index.html available on disk
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+        # Configure environment for GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+
+
