@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 # Only trigger the workflow when push includes changes to index.html
 on:
   push:
+    branches:
+      - main
     paths:
       - "index.html"
 
